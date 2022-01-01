@@ -5,9 +5,9 @@
  
 	// toggle checkbox
 	let checkboxYes = false;
- 	
+
 	// tweening
- 	import { tweened } from 'svelte/motion';
+	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
 	const progress = tweened(0, {
 		duration: 400,
@@ -62,12 +62,9 @@
 <button type="button" on:click="{() => tests = [...tests, tests.length + 1]}">add item</button>
 
 {#each tests as test}
- <!-- <div transition:slide|local>{test}</div> -->
- <!-- <div in:fly="{{ y: 200, duration: 2000 }}" out:fade>{test}</div> -->
-
- <div in:slide out:fade>{test.id}:{test.name}
-<button on:click="{() => tests = tests.filter(el => el.id != test.id)}">x</button>
-</div>
+	<div in:slide out:fade>{test.id}:{test.name}
+	<button on:click="{() => tests = tests.filter(el => el.id != test.id)}">x</button>
+	</div>
 {/each}
 
 <br /><br /><br /><br /><br /><br /><br />
@@ -86,16 +83,16 @@
 	<a href="#short">shorthand directive</a> | 
 
 	<!-- slider -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="slider">slider</a></p><hr>
 	<label>
 		<input type=number bind:value={sliderVal} min=0 max=10>
 		<input type=range bind:value={sliderVal} min=0 max=10>
 	</label>
 	<p>{sliderVal}</p>
-	
+
 	<!-- checkbox -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="checkbox">toggle checkbox</a></p><hr>
 	<label>
 		<input type=checkbox bind:checked={checkboxYes}>blah blah
@@ -108,7 +105,7 @@
 	<button disabled={!checkboxYes}>Subscribe</button>
 
 	<!-- tweening -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="tweening">tweening</a></p><hr>
 	<progress value={$progress}></progress>
 	<button on:click="{() => progress.set(0)}">0%</button>
@@ -118,7 +115,7 @@
 	<button on:click="{() => progress.set(1)}">100%</button>
 
 	<!-- fade -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="fade">fade</a></p><hr>
 	<label>
 		<input type="checkbox" bind:checked={visibleFade}>visible
@@ -128,7 +125,7 @@
 	{/if}
 
 	<!-- fly -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="fly">fly</a></p><hr>
 	<label>
 		<input type="checkbox" bind:checked={visibleFly}>visible</label>
@@ -137,7 +134,7 @@
 	{/if}
 
 	<!-- fly-in/fade-out -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="fly-inFade-out">fly-in/fade-out</a></p><hr>
 	<label>
 		<input type="checkbox" bind:checked={visibleFadeFly}>visible
@@ -147,7 +144,7 @@
 	{/if}
 
 	<!-- local transition -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="local">local transition</a></p><hr>
 	<label><input type="checkbox" bind:checked={showItems}>show list</label>
 	<label><input type="range" bind:value={i} max=10></label>
@@ -160,7 +157,7 @@
 	{/if}
 
 	<!-- key block -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="key">key block</a></p><hr>
 	<div>The number is:
 		{#key keyNumber}
@@ -178,7 +175,7 @@
 	</button>
 
 	<!-- use directive -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="use">use directive</a></p><hr>
 	<button 
 		on:click={() => (showModal = true)}>
@@ -193,7 +190,7 @@
 	{/if}
 	
 	<!-- class directive -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="class">class directive</a></p><hr>
 	<button
 		class:selected="{current === 'foo'}"
@@ -209,7 +206,7 @@
 	>baz</button>
 
 	<!-- shorthand directive -->
-	<br /><br /><br /><br />
+	<br /><br /><br /><br /><br />
 	<p><a id="short">shorthand directive</a></p><hr>
 	<label>
 		<input type=checkbox bind:checked={big}>
