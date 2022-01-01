@@ -69,7 +69,7 @@
 </div>
 {/each}
 
-<br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br />
 
 <!-- toc -->
 	<a href="#slider">slider</a> | 
