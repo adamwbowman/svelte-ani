@@ -64,7 +64,8 @@
 {#each tests as test}
  <!-- <div transition:slide|local>{test}</div> -->
  <!-- <div in:fly="{{ y: 200, duration: 2000 }}" out:fade>{test}</div> -->
-<div in:slide out:fade>{test.id}:{test.name}
+
+ <div in:slide out:fade>{test.id}:{test.name}
 <button on:click="{() => tests = tests.filter(el => el.id != test.id)}">x</button>
 </div>
 {/each}
