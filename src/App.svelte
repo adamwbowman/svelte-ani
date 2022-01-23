@@ -1,9 +1,12 @@
 <script>
 
+	// slider
 	let sliderVal = 1;
  
- let checkboxYes = false;
+	// toggle checkbox
+	let checkboxYes = false;
  	
+	// tweening
  	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
 	const progress = tweened(0, {
@@ -11,18 +14,37 @@
 		easing: cubicOut
 	});
 
+	// fade
 	import { fade } from 'svelte/transition';
 	let visibleFade = true;
 
+	// fly
 	import { fly } from 'svelte/transition';
 	let visibleFly = true;
 
+	// fly-in/fade-out
 	let visibleFadeFly = true;
 
+	// local transition
 	import { slide } from 'svelte/transition';
 	let showItems = true;
 	let i = 5;
-	let items = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+	let items = 
+		['one', 'two', 'three', 'four', 'five', 
+		'six', 'seven', 'eight', 'nine', 'ten'];
+
+	// key blocks
+	let keyNumber = 0;
+
+	// use directice
+	import { clickOutside } from "./click_outside.js";
+	let showModal = true;
+
+	// class directive
+	let current = 'foo';
+
+	// shorthand directive
+	let big = false;
 </script>
 
 <main>
@@ -34,6 +56,10 @@
 	<a href="#fly">fly</a> | 
 	<a href="#fly-inFade-out">fly-in/dafe-out</a> | 
 	<a href="#local">local transition</a> | 
+	<a href="#key">key blocks</a> | 
+	<a href="#use">use directive</a> | 
+	<a href="#class">class directive</a> | 
+	<a href="#short">shorthand directive</a> | 
 
 	<!-- slider -->
 	<br /><br /><br /><br />
@@ -88,7 +114,7 @@
 
 	<!-- fly-in/fade-out -->
 	<br /><br /><br /><br />
-	<p><a id="fly-inFade-out">fly</a></p><hr>
+	<p><a id="fly-inFade-out">fly-in/fade-out</a></p><hr>
 	<label>
 		<input type="checkbox" bind:checked={visibleFadeFly}>visible
 	</label>
@@ -109,9 +135,68 @@
 		{/each}
 	{/if}
 
-	<!-- local transition -->
+	<!-- key block -->
 	<br /><br /><br /><br />
-	<p><a id="local">local transition</a></p><hr>
+	<p><a id="key">key block</a></p><hr>
+	<div>The number is:
+		{#key keyNumber}
+			<span style="display: inline-block" 
+				in:fly={{ y: -20 }}>
+				{keyNumber}
+			</span>
+		{/key}
+	</div><br />
+	<button
+		on:click={() => {
+			keyNumber += 1;
+		}}>
+		Increment
+	</button>
+
+	<!-- use directive -->
+	<br /><br /><br /><br />
+	<p><a id="use">use directive</a></p><hr>
+	<button 
+		on:click={() => (showModal = true)}>
+		Show Modal
+	</button>
+	{#if showModal}
+		<div class="usebox" 
+			use:clickOutside 
+			on:outclick={() => (showModal = false)}>
+			Click outside me!
+		</div>
+	{/if}
+	
+	<!-- class directive -->
+	<br /><br /><br /><br />
+	<p><a id="class">class directive</a></p><hr>
+	<button
+		class:selected="{current === 'foo'}"
+		on:click="{() => current = 'foo'}"
+		>foo</button>
+	<button
+		class:selected="{current === 'bar'}"
+		on:click="{() => current = 'bar'}"
+	>bar</button>
+	<button
+		class:selected="{current === 'baz'}"
+		on:click="{() => current = 'baz'}"
+	>baz</button>
+
+	<!-- shorthand directive -->
+	<br /><br /><br /><br />
+	<p><a id="short">shorthand directive</a></p><hr>
+	<label>
+		<input type=checkbox bind:checked={big}>
+		big
+	</label>
+	<div class:big>
+		some {big ? 'big' : 'small'} text
+	</div>
+	
+
+	<br /><br /><br /><br /><br /><br /><br />
 </main>
 
 <style>
@@ -124,5 +209,29 @@
 	div {
 		padding: 0.5em 0;
 		border-top: 1px solid #eee;
+	}
+	.usebox {
+		--width: 100px;
+		--height: 100px;
+		position: relative;
+		width: var(--width);
+		height: var(--height);
+		left: calc(50% - var(--width) / 2);
+		top: calc(50% - var(--height) / 2);
+		border-radius: 4px;
+		background-color: #ff3e00;
+		color: #fff;
+		text-align: center;
+		font-weight: bold;
+	}
+	button {
+		display: block;
+	}
+	.selected {
+		background-color: #ff3e00;
+		color: white;
+	}
+	.big {
+		font-size: 4em;
 	}
 </style>
