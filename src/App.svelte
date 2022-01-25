@@ -45,9 +45,31 @@
 
 	// shorthand directive
 	let big = false;
+
+	// working
+	let tests = [
+		{id: "23532354", name: "asdfasdf"},
+		{id: "86456764", name: "dfgbdfgb"},
+		{id: "34563456", name: "yurjrjuy"},
+		{id: "85678886", name: "yuikyuku"}
+	]
 </script>
 
 <main>
+<!-- working -->
+<button type="button" on:click="{() => tests = [...tests.slice(0, tests.length -1)]}">remove item</button>
+<button type="button" on:click="{() => tests = [...tests, tests.length + 1]}">add item</button>
+
+{#each tests as test}
+ <!-- <div transition:slide|local>{test}</div> -->
+ <!-- <div in:fly="{{ y: 200, duration: 2000 }}" out:fade>{test}</div> -->
+<div in:slide out:fade>{test.id}:{test.name}
+<button on:click="{() => tests = tests.filter(el => el.id != test.id)}">x</button>
+</div>
+{/each}
+
+<br /><br /><br /><br /><br /><br /><br /><br />
+
 <!-- toc -->
 	<a href="#slider">slider</a> | 
 	<a href="#checkbox">toggle checkbox</a> |
@@ -195,6 +217,10 @@
 		some {big ? 'big' : 'small'} text
 	</div>
 	
+
+
+
+
 
 	<br /><br /><br /><br /><br /><br /><br />
 </main>
